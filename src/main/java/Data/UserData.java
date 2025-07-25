@@ -12,4 +12,11 @@ public class UserData {
 
     public UserData() {
     }
+
+    public static UserData userWithoutPassword(String email, String name) {
+        UserData data = new UserData();
+        data.email = email;
+        data.name = name;
+        return data;
+    }
 }
