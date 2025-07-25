@@ -1,7 +1,6 @@
 package Api;
 
 import Data.IngredientData;
-import Data.UserData;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 

@@ -24,6 +24,16 @@ public class AuthApi {
         return response;
     }
 
+    // метод для шага "Удаление пользователя":
+    @Step("Send POST request to /api/auth/user")
+    public static Response deleteUser(String accessToken) {
+        Response response = given()
+                .header("Authorization", accessToken)
+                .when()
+                .delete(USER_API);
+        return response;
+    }
+
     // метод для шага "Авторизация пользователя":
     @Step("Send POST request to /api/auth/token")
     public static Response loginUser (UserData userData) {
