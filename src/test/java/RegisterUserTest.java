@@ -1,4 +1,3 @@
-import Data.UserData;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterEach;
@@ -11,10 +10,6 @@ import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 
 public class RegisterUserTest extends BaseTest {
-    String accessToken;
-    private boolean shouldDeleteUser = false;
-    UserData userData = new UserData("holodTest@test.ru", "1234", "holod");
-    UserData userDataWithoutPassword = UserData.userWithoutPassword("holodTest@test.ru", "holod");
 
     @Test
     @DisplayName("Check response and status code of /api/auth/register") // имя теста
