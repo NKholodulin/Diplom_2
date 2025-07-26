@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class OrderApi {
     static final String ORDER_API = "/api/orders";
 
-    // метод для шага "Создание заказа":
+    // метод для шага "Создание заказа без авторизации":
     @Step("Send POST request to /api/orders")
     public static Response createOrderWithoutAuthorization(IngredientData ingredientData) {
         Response response = given()
@@ -20,6 +20,8 @@ public class OrderApi {
                 .post(ORDER_API);
         return response;
     }
+
+    // метод для шага "Создание заказа с авторизацией":
     @Step("Send POST request to /api/orders")
     public static Response createOrderWithAuthorization(IngredientData ingredientData, String accessToken) {
         Response response = given()
@@ -27,6 +29,16 @@ public class OrderApi {
                 .header("Authorization", accessToken)
                 .and()
                 .body(ingredientData)
+                .when()
+                .post(ORDER_API);
+        return response;
+    }
+
+    // метод для шага "Создание заказа без ингредиентов":
+    @Step("Send POST request to /api/orders")
+    public static Response createOrderWithoutIngredients() {
+        Response response = given()
+                .header("Content-type", "application/json")
                 .when()
                 .post(ORDER_API);
         return response;

@@ -9,10 +9,8 @@ import java.util.Arrays;
 
 import static Api.AuthApi.*;
 import static Api.IngredientApi.getIngredient;
-import static Api.OrderApi.createOrderWithAuthorization;
-import static Api.OrderApi.createOrderWithoutAuthorization;
-import static org.apache.http.HttpStatus.SC_ACCEPTED;
-import static org.apache.http.HttpStatus.SC_OK;
+import static Api.OrderApi.*;
+import static org.apache.http.HttpStatus.*;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -59,6 +57,29 @@ public class CreateOrderTest extends BaseTest {
                 .body("success", equalTo(true))
                 .body("order.number", notNullValue())
                 .statusCode(SC_OK);
+    }
+
+    @Test
+    @DisplayName("Check without ingredient of /api/orders") // имя теста
+    @Description("Negative test for /api/orders endpoint")
+    public void testCreateOrderWithoutIngredients() {
+        createOrderWithoutIngredients()
+                .then()
+                .assertThat()
+                .body("success", equalTo(false))
+                .body("message", equalTo("Ingredient ids must be provided"))
+                .statusCode(SC_BAD_REQUEST);
+    }
+
+    @Test
+    @DisplayName("Check with incorrect hash of /api/orders") // имя теста
+    @Description("Negative test for /api/orders endpoint")
+    public void testCreateOrderWithIncorrectHash() {
+        IngredientData ingredientDataWithIncorrectHash = new IngredientData(Arrays.asList("123"));
+        createOrderWithoutAuthorization(ingredientDataWithIncorrectHash)
+                .then()
+                .assertThat()
+                .statusCode(SC_INTERNAL_SERVER_ERROR);
     }
 
     @AfterEach
