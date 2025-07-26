@@ -60,7 +60,19 @@ public class AuthApi {
 
     // метод для шага "Обновление информации о пользователе":
     @Step("Send PATCH request to /api/auth/user")
-    public static Response patchUser (UserData userData) {
+    public static Response patchUser (UserData userData, String accessToken) {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .header("Authorization", accessToken)
+                .and()
+                .body(userData)
+                .when()
+                .patch(USER_API);
+        return response;
+    }
+    // метод для шага "Обновление информации о пользователе без авторизации":
+    @Step("Send PATCH request without authorization to /api/auth/user")
+    public static Response patchUserWithoutAuthorization (UserData userData) {
         Response response = given()
                 .header("Content-type", "application/json")
                 .and()
