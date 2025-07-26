@@ -13,8 +13,4 @@ public class IngredientData {
 
     public IngredientData() {
     }
-
-    public void setIngredients(List<String> ingredients) {
-        this.ingredients = ingredients;
-    }
 }
