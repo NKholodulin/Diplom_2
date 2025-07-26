@@ -46,7 +46,18 @@ public class OrderApi {
 
     // метод для шага "Получить заказ конкретного пользователя":
     @Step("Send GET request to /api/orders")
-    public static Response getOrder() {
+    public static Response getOrder(String accessToken) {
+        Response response = given()
+                .header("Content-type", "application/json")
+                .header("Authorization", accessToken)
+                .when()
+                .get(ORDER_API);
+        return response;
+    }
+
+    // метод для шага "Получить заказ конкретного пользователя без авторизации":
+    @Step("Send GET request to /api/orders")
+    public static Response getOrderWithoutAuthorization() {
         Response response = given()
                 .header("Content-type", "application/json")
                 .when()
