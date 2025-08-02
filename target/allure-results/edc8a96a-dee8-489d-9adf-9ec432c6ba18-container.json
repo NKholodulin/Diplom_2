@@ -1,0 +1,1 @@
+{"uuid":"edc8a96a-dee8-489d-9adf-9ec432c6ba18","name":"Check response and status code of /api/auth/user","children":["e952e02e-ca50-4a4b-a173-fa223d7c350e"],"befores":[],"afters":[],"start":1754131343142,"stop":1754131344390}
