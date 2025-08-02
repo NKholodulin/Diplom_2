@@ -1,15 +1,19 @@
 import Data.IngredientData;
 import Data.UserData;
 import io.restassured.RestAssured;
+import net.datafaker.Faker;
 import org.junit.jupiter.api.BeforeEach;
 
-import java.util.Arrays;
-
 public class BaseTest {
-    UserData userData = new UserData("holodTest@test.ru", "1234", "holod");
-    UserData userDataWithoutPassword = UserData.userWithoutPassword("holodTest@test.ru", "holod");
-    UserData userDataWithIncorrectParams = new UserData("incorrectholodTest@test.ru", "incorrect1234", "incorrectholod");
-    UserData userDataForUpdate = new UserData("updateholodTest@test.ru", "update1234", "updateholod");
+    Faker faker = new Faker();
+    String name = faker.name().firstName();
+    String email = name + "@test.ru";
+    String password = faker.regexify("[A-Za-z0-9]{10}");
+
+    UserData userData = new UserData(email, password, name);
+    UserData userDataWithoutPassword = UserData.userWithoutPassword(email, name);
+    UserData userDataWithIncorrectParams = new UserData("incorrect" + email, "incorrect" + password, "incorrect" + name);
+    UserData userDataForUpdate = new UserData("update" + email, "update" + password, "update" + name);
     String accessToken;
     String ingredient;
     boolean shouldDeleteUser = false;

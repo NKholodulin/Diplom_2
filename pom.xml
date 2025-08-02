@@ -82,6 +82,11 @@
       <version>1.18.28</version> <!-- или актуальную версию -->
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>net.datafaker</groupId>
+      <artifactId>datafaker</artifactId>
+      <version>1.8.0</version> <!-- или актуальную версию -->
+    </dependency>
   </dependencies>
 
   <build>
